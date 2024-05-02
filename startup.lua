@@ -6,7 +6,7 @@ local moveToChest = moveToChest.moveToChestLoop
 local addToAllFurnaces = addToFurnaces.addToAllFurnaces
 
 print("Bot 64")
-print("Computador central da fornalha autom�tica")
+print("Computador central da fornalha automática")
 parallel.waitForAll(addToAllFurnaces, feedFurnacesLoop, moveToChest)
 --[[ while true do
     sleep(0.05)
