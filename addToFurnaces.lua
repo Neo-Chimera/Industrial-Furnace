@@ -33,7 +33,6 @@ function addToBlastFurnaces()
     local itemTags = materialChest.getItemDetail(firstSlot).tags
     local isRawMaterial = tableHasKey(itemTags, "forge:raw_materials")
     if(isRawMaterial) then
-        local firstSlot = getFirstItemSlot()
         if not firstSlot then return nil end
         
         local intAmount = math.floor(materialChest.getItemDetail(firstSlot).count / #allBlastFurnaces)
@@ -69,6 +68,7 @@ end
 function addToAllFurnaces()
     while true do
         local firstSlot = getFirstItemSlot()
+        if not firstSlot then goto continue end
         local itemTags = materialChest.getItemDetail(firstSlot).tags
         local isRawMaterial = tableHasKey(itemTags, "forge:raw_materials")
         if isRawMaterial and not getFurnaces.areAllBlastFurnacesFull() then
@@ -76,5 +76,6 @@ function addToAllFurnaces()
         else
             addToFurnaces()
         end
+        ::continue::
     end
 end
