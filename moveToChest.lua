@@ -28,7 +28,7 @@ end
 function moveToChestLoop()
     while true do
         moveToChest()
+        sleep(0.05)
     end
 end
-
 
