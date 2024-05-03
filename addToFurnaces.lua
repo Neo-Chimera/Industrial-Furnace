@@ -76,6 +76,7 @@ function addToAllFurnaces()
         else
             addToFurnaces()
         end
+        sleep(0.05)
         ::continue::
     end
 end
