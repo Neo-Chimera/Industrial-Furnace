@@ -64,5 +64,11 @@ end
 function feedFurnacesLoop()
     while true do
         feedFurnaces()
+        function moveToChestLoop()
+    while true do
+        moveToChest()
+        sleep(0.05)
+    end
+end
     end
 end
