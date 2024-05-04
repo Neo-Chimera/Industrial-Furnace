@@ -1,7 +1,7 @@
 os.loadAPI("getFurnaces.lua")
 local allPeripheralsNames = peripheral.getNames()
 local fuelChest = peripheral.wrap("toms_storage:ts.inventory_connector.tile_4")
-local allFurnacesNames = getFurnaces.getGenericFurnaces()
+local allFurnaces = getFurnaces.getGenericFurnaces()
 
 local fuelTypes = {
     { name = "minecraft:lava_bucket", minCount = 1 },
@@ -9,10 +9,6 @@ local fuelTypes = {
     { name = "minecraft:dried_kelp_block", minCount = 5 },
     { name = "minecraft:bamboo_planks", minCount = 8 },
 }
-
-for number, furnaceName in pairs(allFurnacesNames) do
-    local furnace = peripheral.wrap(furnaceName)    
-end
 
 function getFirstSlotWithFuel(fuelArray)
     for slot, item in pairs(fuelChest.list()) do
@@ -51,8 +47,7 @@ end
 
 
 function feedFurnaces() 
-    for number, furnaceName in pairs(allFurnacesNames) do
-        local furnace = peripheral.wrap(furnaceName)
+    for number, furnace in pairs(allFurnaces) do
         if not furnace.list()[2] then
             local slot, count = getFirstSlotWithFuel(fuelTypes)
             if slot then
