@@ -51,7 +51,7 @@ function feedFurnaces()
         if not furnace.list()[2] then
             local slot, count = getFirstSlotWithFuel(fuelTypes)
             if slot then
-                fuelChest.pushItems(furnaceName, slot, count, 2)        
+                fuelChest.pushItems(peripheral.getName(furnace), slot, count, 2)        
             end
         end  
     end
