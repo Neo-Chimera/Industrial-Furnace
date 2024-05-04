@@ -5,8 +5,8 @@ local allFurnaces = getFurnaces.getGenericFurnaces()
 
 local fuelTypes = {
     { name = "minecraft:lava_bucket", minCount = 1 },
-    { name = "minecraft:bamboo", minCount = 32 },
-    { name = "minecraft:dried_kelp_block", minCount = 5 },
+    { name = "minecraft:bamboo", minCount = 64 },
+    { name = "minecraft:dried_kelp_block", minCount = 1 },
     { name = "minecraft:bamboo_planks", minCount = 8 },
 }
 
