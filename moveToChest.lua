@@ -15,12 +15,12 @@ end
 
 function moveToChest()
     checkEmptyBucket()
-    for _, furnaceName in pairs(allFurnaces) do
+    for _, furnace in pairs(allFurnaces) do
         sleep(0.05)    
-        local furnace = peripheral.wrap(furnaceName)
+        
         local result = furnace.list()[3]
         if result ~= nil then
-            chest.pullItems(furnaceName, 3)
+            chest.pullItems(peripheral.getName(furnace), 3)
         end
     end
 end
