@@ -5,7 +5,7 @@ local allFurnaces = getFurnaces.getGenericFurnaces()
 
 local fuelTypes = {
     { name = "minecraft:lava_bucket", minCount = 1 },
-    { name = "minecraft:bamboo", minCount = 64 },
+    { name = "minecraft:bamboo", minCount = 32 },
     { name = "minecraft:dried_kelp_block", minCount = 1 },
     { name = "minecraft:bamboo_planks", minCount = 8 },
 }
@@ -23,12 +23,10 @@ end
 
 function feedFurnaces() 
     for number, furnace in pairs(allFurnaces) do
-        if not furnace.list()[2] then
-            local slot, count = getFirstSlotWithFuel(fuelTypes)
-            if slot then
-                fuelChest.pushItems(peripheral.getName(furnace), slot, count, 2)        
-            end
-        end  
+        local slot, count = getFirstSlotWithFuel(fuelTypes)
+        if slot then
+            fuelChest.pushItems(peripheral.getName(furnace), slot, count, 2)        
+        end
     end
 end
 
