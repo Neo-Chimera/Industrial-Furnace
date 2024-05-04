@@ -7,6 +7,7 @@ local fuelTypes = {
     { name = "minecraft:lava_bucket", minCount = 1 },
     { name = "minecraft:bamboo", minCount = 32 },
     { name = "minecraft:dried_kelp_block", minCount = 5 },
+    { name = "minecraft:bamboo_planks", minCount = 8 },
 }
 
 for number, furnaceName in pairs(allFurnacesNames) do
@@ -64,11 +65,6 @@ end
 function feedFurnacesLoop()
     while true do
         feedFurnaces()
-        function moveToChestLoop()
-    while true do
-        moveToChest()
         sleep(0.05)
-    end
-end
     end
 end
