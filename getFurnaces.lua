@@ -1,6 +1,7 @@
 local allPeripheralsNames = peripheral.getNames()
-local allFurnaces = {}
-local allBlastFurnaces = {}
+local allFurnaces = {peripheral.find("minecraft:furnace")}
+local allBlastFurnaces = {peripheral.find("minecraft:blast_furnace")}
+
 local materialChest = peripheral.wrap("toms_storage:ts.inventory_proxy.tile_2")
 
 function concatTables(table1, table2)
@@ -15,19 +16,16 @@ function concatTables(table1, table2)
     return result
 end
 
-
-
-for _, name in pairs(allPeripheralsNames) do
-    if peripheral.getType(name) == "minecraft:furnace" then
-        table.insert(allFurnaces, name)
-    end
-    if peripheral.getType(name) == "minecraft:blast_furnace" then
-        table.insert(allBlastFurnaces, name)
-    end
-end
-
 function getBlastFurnaces()
     return allBlastFurnaces
+end
+
+function getFurnaces()
+    return allFurnaces
+end
+
+function getSmokers()
+    return allFurnaces
 end
 
 function areAllBlastFurnacesFull()
@@ -48,10 +46,6 @@ function areAllFurnacesFull()
     return true
 end
 
-
-function getFurnaces()
-    return allFurnaces
-end
 
 function getGenericFurnaces()
     return concatTables(allBlastFurnaces, allFurnaces)
