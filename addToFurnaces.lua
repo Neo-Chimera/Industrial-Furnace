@@ -67,6 +67,7 @@ end
 
 function addToAllFurnaces()
     while true do
+        sleep(0.05)
         local firstSlot = getFirstItemSlot()
         if not firstSlot then goto continue end
         local itemTags = materialChest.getItemDetail(firstSlot).tags
@@ -77,6 +78,5 @@ function addToAllFurnaces()
             addToFurnaces()
         end
         ::continue::
-        sleep(0.05)
     end
 end
