@@ -2,6 +2,7 @@ os.loadAPI("getFurnaces.lua")
 local allPeripheralsNames = peripheral.getNames()
 local allFurnaces = getFurnaces.getFurnaces()
 local allBlastFurnaces = getFurnaces.getBlastFurnaces()
+local allSmokers = getFurnaces.getSmokers()
 local materialChest = peripheral.wrap("toms_storage:ts.inventory_proxy.tile_2")
 
 function tableHasKey(tbl, key)
@@ -24,7 +25,7 @@ end
 function addToFurnace(furnaceName, amount)
     if getFirstItemSlot() then 
         local firstSlot = getFirstItemSlot()
-        materialChest.pushItems(furnaceName, firstSlot, amount, 1)
+        materialChest.pushItems(peripheral.getName(furnaceName), firstSlot, amount, 1)
     end
 end
 
