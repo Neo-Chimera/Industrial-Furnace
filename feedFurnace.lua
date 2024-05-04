@@ -21,31 +21,6 @@ function getFirstSlotWithFuel(fuelArray)
     return nil, 0
 end
 
-function getFirstSlotWithLava() 
-    for slot, item in pairs(fuelChest.list()) do    
-        if(item.name == "minecraft:lava_bucket") then
-            return slot
-        end
-    end
-end
-
-function getFirstSlotWithBamboo() 
-    for slot, item in pairs(fuelChest.list()) do    
-        if(item.name == "minecraft:bamboo" and item.cound >= 32) then
-            return slot
-        end
-    end
-end
-
-function getFirstSlotWithKelp() 
-    for slot, item in pairs(fuelChest.list()) do    
-        if(item.name == "minecraft:dried_kelp_block" and item.cound >= 32) then
-            return slot
-        end
-    end
-end
-
-
 function feedFurnaces() 
     for number, furnace in pairs(allFurnaces) do
         if not furnace.list()[2] then
