@@ -29,8 +29,8 @@ function getSmokers()
 end
 
 function areAllBlastFurnacesFull()
-    for _, name in pairs(allBlastFurnaces) do
-        if not peripheral.wrap(name).getItemDetail(1) then
+    for _, furnace in pairs(allBlastFurnaces) do
+        if not furnace.getItemDetail(1) then
             return false
         end
     end
@@ -38,8 +38,8 @@ function areAllBlastFurnacesFull()
 end
 
 function areAllFurnacesFull()
-    for _, name in pairs(allFurnaces) do
-        if not peripheral.wrap(name).getItemDetail(1) then
+    for _, furnace in pairs(allFurnaces) do
+        if not furnace.getItemDetail(1) then
             return false
         end
     end
