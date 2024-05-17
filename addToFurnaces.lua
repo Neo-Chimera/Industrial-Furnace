@@ -37,33 +37,33 @@ function addToBlastFurnaces()
         if not firstSlot then return nil end
         
         local intAmount = math.floor(materialChest.getItemDetail(firstSlot).count / #allBlastFurnaces)
+        local restAmount = math.fmod(materialChest.getItemDetail(firstSlot).count, #allBlastFurnaces)
         if(intAmount > 0) then
-            for _, furnaceName in pairs(allBlastFurnaces) do
-                addToFurnace(furnaceName, intAmount)
+            for i, furnaceName in pairs(allBlastFurnaces) do
+                if (i <= restAmount) then
+                    addToFurnace(furnaceName, intAmount + 1)
+                else
+                    addToFurnace(furnaceName, intAmount)
+                end
             end
         end
-        --add the rest of the items 
-        for _, furnaceName in pairs(allBlastFurnaces) do
-            addToFurnace(furnaceName, 1)
-        end
     end
-    return
 end
 
 function addToFurnaces()
     local firstSlot = getFirstItemSlot()
     if not firstSlot or firstSlot == nil then return nil end
     local intAmount = math.floor(materialChest.getItemDetail(firstSlot).count / #allFurnaces)
-    if(intAmount > 0) then
-        for _, furnaceName in pairs(allFurnaces) do
-            addToFurnace(furnaceName, intAmount)
+    local restAmount = math.fmod(materialChest.getItemDetail(firstSlot).count, #allFurnaces)
+    if(intAmount > 0 or restAmount > 0) then
+        for i, furnaceName in pairs(allFurnaces) do
+            if (i <= restAmount) then
+                addToFurnace(furnaceName, intAmount + 1)
+            else
+                addToFurnace(furnaceName, intAmount)
+            end
         end
     end
-    --add the rest of the items
-    for _, furnaceName in pairs(allFurnaces) do
-        addToFurnace(furnaceName, 1)
-    end
-    return
 end
 
 function addToAllFurnaces()
