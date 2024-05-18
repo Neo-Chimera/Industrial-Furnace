@@ -21,18 +21,20 @@ function getFirstSlotWithFuel(fuelArray)
     return nil, 0
 end
 
-function feedFurnaces() 
-    for number, furnace in pairs(allFurnaces) do
+local function feedSingleFurnace(furnace)
+    while true do
         local slot, count = getFirstSlotWithFuel(fuelTypes)
         if slot then
-            fuelChest.pushItems(peripheral.getName(furnace), slot, count, 2)        
+            fuelChest.pushItems(peripheral.getName(furnace), slot, count, 2)
         end
+        sleep(0.05)
     end
 end
 
-function feedFurnacesLoop()
-    while true do
-        feedFurnaces()
-        sleep(0.05)
+function feedAllFurnaces()
+    local tasks = {}
+    for _, furnace in pairs(allFurnaces) do
+        table.insert(tasks, function() feedSingleFurnace(furnace) end)
     end
+    parallel.waitForAll(table.unpack(tasks))
 end
