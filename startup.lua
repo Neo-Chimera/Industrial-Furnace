@@ -21,4 +21,7 @@ for _, furnace in pairs(allGenericFurnaces) do
         )
     end)
 end
-parallel.waitForAll(table.unpack(tasks))
+while true do
+    parallel.waitForAll(table.unpack(tasks))
+    sleep(1)
+end
