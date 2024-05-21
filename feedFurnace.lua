@@ -8,6 +8,7 @@ local fuelTypes = {
     { name = "minecraft:bamboo", minCount = 32 },
     { name = "minecraft:dried_kelp_block", minCount = 1 },
     { name = "minecraft:bamboo_planks", minCount = 8 },
+    { name = "minecraft:coal", minCount = 4 }
 }
 
 function getFirstSlotWithFuel(fuelArray)
@@ -21,7 +22,7 @@ function getFirstSlotWithFuel(fuelArray)
     return nil, 0
 end
 
-local function feedSingleFurnace(furnace)
+function feedSingleFurnace(furnace)
     while true do
         local slot, count = getFirstSlotWithFuel(fuelTypes)
         if slot then
