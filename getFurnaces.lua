@@ -2,8 +2,6 @@ local allPeripheralsNames = peripheral.getNames()
 local allFurnaces = {peripheral.find("minecraft:furnace")}
 local allBlastFurnaces = {peripheral.find("minecraft:blast_furnace")}
 
-local materialChest = peripheral.wrap("toms_storage:ts.inventory_proxy.tile_2")
-
 function concatTables(table1, table2)
     local result = {}
     for _, value in ipairs(table1) do
