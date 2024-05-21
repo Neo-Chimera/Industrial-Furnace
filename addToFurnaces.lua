@@ -2,6 +2,7 @@ os.loadAPI("getFurnaces.lua")
 local allPeripheralsNames = peripheral.getNames()
 local allFurnaces = getFurnaces.getFurnaces()
 local allBlastFurnaces = getFurnaces.getBlastFurnaces()
+local allGenericFurnaces = getFurnaces.getGenericFurnaces()
 local allSmokers = getFurnaces.getSmokers()
 local materialChest = peripheral.wrap("toms_storage:ts.inventory_proxy.tile_2")
 
@@ -22,42 +23,32 @@ function getFirstItemSlot()
 end
 
 
-function addToFurnace(furnaceName, amount)
-    if getFirstItemSlot() then 
-        local firstSlot = getFirstItemSlot()
-        materialChest.pushItems(peripheral.getName(furnaceName), firstSlot, amount, 1)
+function addToFurnace(furnace, amount)
+    local firstSlot = getFirstItemSlot()
+    if firstSlot then 
+        materialChest.pushItems(peripheral.getName(furnace), firstSlot, amount, 1)
     end
 end
 
-function addToBlastFurnaces()
+function addToFurnaces(furnaceType)
     local firstSlot = getFirstItemSlot()
+    if not firstSlot then return nil end
+    
+    local furnaces = furnaceType == "blast" and allBlastFurnaces or allFurnaces
     local itemTags = materialChest.getItemDetail(firstSlot).tags
     local isRawMaterial = tableHasKey(itemTags, "forge:raw_materials")
-    if(isRawMaterial) then
-        if not firstSlot then return nil end
-        
-        local intAmount = math.floor(materialChest.getItemDetail(firstSlot).count / #allBlastFurnaces)
-        local restAmount = math.fmod(materialChest.getItemDetail(firstSlot).count, #allBlastFurnaces)
-        if(intAmount > 0) then
-            for i, furnaceName in pairs(allBlastFurnaces) do
-                if (i <= restAmount) then
-                    addToFurnace(furnaceName, intAmount + 1)
-                else
-                    addToFurnace(furnaceName, intAmount)
-                end
-            end
-        end
+    
+    if furnaceType == "blast" and not isRawMaterial then
+        return nil
     end
-end
-
-function addToFurnaces()
-    local firstSlot = getFirstItemSlot()
-    if not firstSlot or firstSlot == nil then return nil end
-    local intAmount = math.floor(materialChest.getItemDetail(firstSlot).count / #allFurnaces)
-    local restAmount = math.fmod(materialChest.getItemDetail(firstSlot).count, #allFurnaces)
-    if(intAmount > 0 or restAmount > 0) then
-        for i, furnaceName in pairs(allFurnaces) do
-            if (i <= restAmount) then
+    
+    local itemCount = materialChest.getItemDetail(firstSlot).count
+    local intAmount = math.floor(itemCount / #furnaces)
+    local restAmount = math.fmod(itemCount, #furnaces)
+    
+    if intAmount > 0 or restAmount > 0 then
+        for i, furnaceName in pairs(furnaces) do
+            if i <= restAmount then
                 addToFurnace(furnaceName, intAmount + 1)
             else
                 addToFurnace(furnaceName, intAmount)
@@ -80,4 +71,37 @@ function addToAllFurnaces()
         end
         ::continue::
     end
+end
+
+function addToSelf(furnace)
+    
+    while true do
+        sleep(0.2)
+        local furnaceType = peripheral.getType(furnace)
+        local firstSlot = getFirstItemSlot()
+        if not firstSlot then goto continue end
+        
+        local itemDetail = materialChest.getItemDetail(firstSlot)
+        if not itemDetail then goto continue end
+        local itemTags = itemDetail.tags
+        local isRawMaterial = tableHasKey(itemTags, "forge:raw_materials")
+        
+        if furnaceType == "minecraft:blast_furnace" then
+            if isRawMaterial and not getFurnaces.isBlastFurnaceFull(furnace) then
+                addToFurnace(furnace, 1)
+            end
+        else
+            addToFurnace(furnace, 1)
+        end
+
+        ::continue::
+        
+    end
+end
+function addToAllFurnacesIndependant()
+    local tasks = {}
+    for _, furnace in pairs(allGenericFurnaces) do
+        table.insert(tasks, function() addToSelf(furnace) end)
+    end
+    parallel.waitForAll(table.unpack(tasks))
 end
