@@ -86,7 +86,7 @@ function addToSelf(furnace)
         local isRawMaterial = tableHasKey(itemTags, "forge:raw_materials")
         
         if furnaceType == "minecraft:blast_furnace" then
-            if isRawMaterial and not getFurnaces.isBlastFurnacesFull(furnace) then
+            if isRawMaterial and not getFurnaces.areAllBlastFurnacesFull(furnace) then
                 addToFurnace(furnace, 1)
             end
         else
