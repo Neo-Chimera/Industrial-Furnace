@@ -3,7 +3,6 @@ local allPeripheralsNames = peripheral.getNames()
 local allFurnaces = getFurnaces.getFurnaces()
 local allBlastFurnaces = getFurnaces.getBlastFurnaces()
 local allGenericFurnaces = getFurnaces.getGenericFurnaces()
-local allSmokers = getFurnaces.getSmokers()
 local materialChest = peripheral.wrap("toms_storage:ts.inventory_proxy.tile_2")
 
 function tableHasKey(tbl, key)
