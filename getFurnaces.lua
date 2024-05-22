@@ -1,7 +1,6 @@
 local allPeripheralsNames = peripheral.getNames()
 local allFurnaces = {peripheral.find("minecraft:furnace")}
 local allBlastFurnaces = {peripheral.find("minecraft:blast_furnace")}
-local allSmokers = {peripheral.find("minecraft:smoker")}
 
 function concatTables(table1, table2)
     local result = {}
@@ -21,10 +20,6 @@ end
 
 function getFurnaces()
     return allFurnaces
-end
-
-function getSmokers()
-    return allSmokers
 end
 
 function areAllBlastFurnacesFull()
