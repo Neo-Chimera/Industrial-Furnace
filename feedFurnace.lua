@@ -1,6 +1,6 @@
 os.loadAPI("getFurnaces.lua")
 local allPeripheralsNames = peripheral.getNames()
-local fuelChest = peripheral.wrap("toms_storage:ts.inventory_connector.tile_4")
+local fuelChest = peripheral.wrap("sophisticatedstorage:barrel_3")
 local allFurnaces = getFurnaces.getGenericFurnaces()
 
 local fuelTypes = {
@@ -8,7 +8,8 @@ local fuelTypes = {
     { name = "minecraft:bamboo", minCount = 32 },
     { name = "minecraft:dried_kelp_block", minCount = 1 },
     { name = "minecraft:bamboo_planks", minCount = 8 },
-    { name = "minecraft:coal", minCount = 4 }
+    { name = "minecraft:coal", minCount = 4 },
+    { name = "minecraft:blaze_rod", minCount = 1 }
 }
 
 function getFirstSlotWithFuel(fuelArray)
