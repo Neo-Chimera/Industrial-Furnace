@@ -1,13 +1,14 @@
 os.loadAPI("getFurnaces.lua")
 local allPeripherals = peripheral.getNames()
-local chest = peripheral.wrap("toms_storage:ts.inventory_proxy.tile_1")
+local chest = peripheral.wrap("sophisticatedstorage:barrel_5")
+local bucketStorage = peripheral.wrap("sophisticatedbackpacks:backpack_2")
 local allFurnaces = getFurnaces.getGenericFurnaces()
 
 function checkEmptyBucket() 
     for _, furnace in pairs(allFurnaces) do
         local fuel = furnace.list()[2]
         if fuel ~= nil and fuel.name == "minecraft:bucket" then
-            chest.pullItems(peripheral.getName(furnace), 2)
+            bucketStorage.pullItems(peripheral.getName(furnace), 2)
         end
     end
 end
