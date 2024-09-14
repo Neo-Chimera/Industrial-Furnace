@@ -1,7 +1,8 @@
 os.loadAPI("getFurnaces.lua")
+os.loadAPI("invProvider.lua")
 local allPeripherals = peripheral.getNames()
-local chest = peripheral.wrap("sophisticatedstorage:barrel_5")
-local bucketStorage = peripheral.wrap("sophisticatedbackpacks:backpack_2")
+local resultChest = invProvider.resultChest
+local bucketStorage = invProvider.bucketStorage
 local allFurnaces = getFurnaces.getGenericFurnaces()
 
 function checkEmptyBucket() 
@@ -19,7 +20,7 @@ function moveToChestSingle(furnace)
         checkEmptyBucket()
         local result = furnace.list()[3]
         if result then
-            chest.pullItems(peripheral.getName(furnace), 3)
+            resultChest.pullItems(peripheral.getName(furnace), 3)
         end
         sleep(0.05)
     end
