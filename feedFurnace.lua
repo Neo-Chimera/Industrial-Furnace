@@ -1,6 +1,8 @@
 os.loadAPI("getFurnaces.lua")
+os.loadAPI("invProvider.lua")
+
 local allPeripheralsNames = peripheral.getNames()
-local fuelChest = peripheral.wrap("sophisticatedstorage:barrel_3")
+local fuelChest = invProvider.fuelChest
 local allFurnaces = getFurnaces.getGenericFurnaces()
 
 local fuelTypes = {
