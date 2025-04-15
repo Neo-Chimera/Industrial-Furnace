@@ -11,7 +11,8 @@ local fuelTypes = {
     { name = "minecraft:dried_kelp_block", minCount = 1 },
     { name = "minecraft:bamboo_planks", minCount = 8 },
     { name = "minecraft:coal", minCount = 4 },
-    { name = "minecraft:blaze_rod", minCount = 1 }
+    { name = "minecraft:blaze_rod", minCount = 1 },
+    { name = "minecraft:spruce_planks", minCount = 8 }
 }
 
 function getFirstSlotWithFuel(fuelArray)
